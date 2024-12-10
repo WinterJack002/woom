@@ -50,6 +50,8 @@ func Daemon(ctx context.Context) {
 
 	handler := api.NewApi(rdb, cfg.Secret, cfg.Live777Url, cfg.Live777Token)
 
-	log.Println("=== started ===")
-	log.Panicln(http.ListenAndServe(":"+cfg.Port, handler))
+	//log.Println("=== started ===")
+	//log.Panicln(http.ListenAndServe(":"+cfg.Port, handler))
+	log.Println("=== HTTPS server started ===")
+	log.Panicln(http.ListenAndServeTLS(":"+cfg.Port, cfg.CertFile, cfg.KeyFile, handler))
 }
